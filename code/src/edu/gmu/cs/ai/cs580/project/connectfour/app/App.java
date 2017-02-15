@@ -1,11 +1,12 @@
 package edu.gmu.cs.ai.cs580.project.connectfour.app;
 
 import edu.gmu.cs.ai.cs580.project.connectfour.agent.ConnectFourAgent;
+import edu.gmu.cs.ai.cs580.project.connectfour.agent.HumanPlayer;
 import edu.gmu.cs.ai.cs580.project.connectfour.agent.RandomMachinePlayer;
+import edu.gmu.cs.ai.cs580.project.connectfour.agent.TestAgent;
 import edu.gmu.cs.ai.cs580.project.connectfour.common.GameState;
 import edu.gmu.cs.ai.cs580.project.connectfour.common.Player;
-import edu.gmu.cs.ai.cs580.project.connectfour.common.Sequence;
-import edu.gmu.cs.ai.cs580.project.connectfour.common.SequenceConstants;
+import edu.gmu.cs.ai.cs580.project.connectfour.common.WinCheckResult;
 import edu.gmu.cs.ai.cs580.project.connectfour.ui.ConnectFourUI;
 
 public class App {
@@ -17,65 +18,44 @@ public class App {
         ConnectFourUI userInterface = new ConnectFourUI(masterGameState);
         userInterface.displayUI();
         
-        ConnectFourAgent player1 = new RandomMachinePlayer(Player.PLAYER_A);
-        ConnectFourAgent player2 = new RandomMachinePlayer(Player.PLAYER_B);
+       // ConnectFourAgent player1 = new RandomMachinePlayer(Player.PLAYER_A);
+        ConnectFourAgent player2 = new HumanPlayer(Player.PLAYER_B, userInterface);
+        
+        //--------------------------------------------------------------
+        
+        ConnectFourAgent player1 = new TestAgent(Player.PLAYER_A);
+        //ConnectFourAgent player2 = new HumanPlayer(Player.PLAYER_B, userInterface);
+        //ConnectFourAgent player2 = new RandomMachinePlayer(Player.PLAYER_B);
+        
+        ConnectFourAgent[] playerArray = new ConnectFourAgent[2];
+        playerArray[0] = player1;
+        playerArray[1] = player2;
         
         boolean complete = false;
+        int moveNumber = 0;
         
         while(!complete) {
-            Integer k = player1.getNextMove(masterGameState);
+            
+            ConnectFourAgent currentPlayer = playerArray[moveNumber % 2];
+            
+            Integer k = currentPlayer.getNextMove(masterGameState);
             try {
-                masterGameState.makeMove(k, player1.getPlayer());
+                masterGameState.makeMove(k, currentPlayer.getPlayer());
                 userInterface.refresh();
-                complete = masterGameState.containsFourInARow();
+                
+                WinCheckResult winCheckResult = masterGameState.checkForWinner();
+                complete = winCheckResult.getFoundWinner();
+                
+                if(complete) {
+                    System.out.println("Winner found: " + winCheckResult.getWinningPlayer());
+                }
             }
             catch(Exception e) {
                 complete = true;
                 e.printStackTrace();
             }
-            
-
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-                complete = true;
-            }
-            
-            if(!complete) {
-                Integer m = player2.getNextMove(masterGameState);
-                try {
-                    masterGameState.makeMove(m, player2.getPlayer());
-                    userInterface.refresh();
-                    complete = masterGameState.containsFourInARow();
-                }
-                catch(Exception e) {
-                    complete = true;
-                    e.printStackTrace();
-                }
-                
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                    complete = true;
-                }
-            }
-            
-            
-        }
-        
-        
-        // Setup the game. Force them to click on "Start a new Game".
-        
-
-        
-        int i = 1;
-        for(Sequence seq : SequenceConstants.ALL_SEQUENCES) {
-            System.out.println("Sequence #" + i + " - " + seq.toString());
-            i++;
+                        
+            moveNumber++;
         }
     }
 }

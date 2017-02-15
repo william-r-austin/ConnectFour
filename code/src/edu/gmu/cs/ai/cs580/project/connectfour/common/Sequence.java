@@ -3,11 +3,11 @@ package edu.gmu.cs.ai.cs580.project.connectfour.common;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class Sequence implements Iterable<Pair> {
-    private Pair[] locations = new Pair[Constants.WINNING_DISCS_COUNT];
-    private SequenceType sequenceType;
+public class Sequence implements Iterable<Square> {
+    private Square[] locations = new Square[Constants.WINNING_DISCS_COUNT];
+    private OrientationType sequenceType;
     
-    public void setPair(Integer pairNumber, Pair pairValue) {
+    public void setPair(Integer pairNumber, Square pairValue) {
         if(pairNumber != null && pairNumber >= 0 && pairNumber < Constants.WINNING_DISCS_COUNT) {
             locations[pairNumber] = pairValue;
         }
@@ -16,8 +16,8 @@ public class Sequence implements Iterable<Pair> {
         }
     }
     
-    public Pair getPair(Integer pairNumber) {
-        Pair pair = null;
+    public Square getPair(Integer pairNumber) {
+        Square pair = null;
         
         if(pairNumber != null && pairNumber >= 0 && pairNumber < Constants.WINNING_DISCS_COUNT) {
             pair = locations[pairNumber];
@@ -29,11 +29,11 @@ public class Sequence implements Iterable<Pair> {
         return pair;
     }
 
-    public SequenceType getSequenceType() {
+    public OrientationType getSequenceType() {
         return sequenceType;
     }
 
-    public void setSequenceType(SequenceType sequenceType) {
+    public void setSequenceType(OrientationType sequenceType) {
         this.sequenceType = sequenceType;
     }
 
@@ -43,8 +43,8 @@ public class Sequence implements Iterable<Pair> {
     }
 
     @Override
-    public Iterator<Pair> iterator() {
-        Iterator<Pair> myIterator = new SequenceIterator(this);
+    public Iterator<Square> iterator() {
+        Iterator<Square> myIterator = new SequenceIterator(this);
         return myIterator;
     }
 

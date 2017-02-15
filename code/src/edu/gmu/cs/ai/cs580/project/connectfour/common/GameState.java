@@ -149,33 +149,40 @@ public class GameState {
         }
     }
     
-    public Boolean containsFourInARow() {
+    public WinCheckResult checkForWinner() {
         for(Sequence sequence : SequenceConstants.ALL_SEQUENCES) {
-            if(isWinningSequence(sequence)) {
-                return true;
+            WinCheckResult wcr = populateWinCheckResultForSequence(sequence);
+            if(wcr != null && wcr.getFoundWinner()) {
+                return wcr;
             }
         }
                 
-        return false;
+        return new WinCheckResult();
     }
     
-    public Boolean isWinningSequence(Sequence sequence) {
+    public WinCheckResult populateWinCheckResultForSequence(Sequence sequence) {
         Set<FillType> fillTypes = new HashSet<FillType>();
         
-        for(Pair p : sequence) {
-            FillType fillType = boardState[p.a()][p.b()];
+        for(Square p : sequence) {
+            FillType fillType = boardState[p.col()][p.row()];
             
             if(FillType.EMPTY.equals(fillType)) {
-                return false;
+                return null;
             }
             
             fillTypes.add(fillType);
             if(fillTypes.size() > 1) {
-                return false;
+                return null;
             }
         }
         
-        return true;
+        Player winningPlayer = Player.getPlayerFromFillType(fillTypes.iterator().next());
+        
+        WinCheckResult winCheckResult = new WinCheckResult();
+        winCheckResult.setFoundWinner(true);
+        winCheckResult.setWinningPlayer(winningPlayer);
+        
+        return winCheckResult;
     }
 
     @Override

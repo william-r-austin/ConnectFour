@@ -9,14 +9,16 @@ public class HumanPlayer implements ConnectFourAgent {
     public ConnectFourUI userInterface;
     private Player player;
     
-    public HumanPlayer(Player player) {
+    public HumanPlayer(Player player, ConnectFourUI userInterface) {
         this.player = player;
+        this.userInterface = userInterface;
     }
     
     @Override
     public Integer getNextMove(GameState gameState) {
-        // TODO Auto-generated method stub
-        return null;
+        userInterface.beginMouseMonitoring();
+        Integer clickedColumn = userInterface.waitAndGetClickedColumn();
+        return clickedColumn;
     }
     
     @Override

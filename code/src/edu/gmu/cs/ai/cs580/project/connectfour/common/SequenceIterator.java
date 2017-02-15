@@ -3,7 +3,7 @@ package edu.gmu.cs.ai.cs580.project.connectfour.common;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class SequenceIterator implements Iterator<Pair> {
+public class SequenceIterator implements Iterator<Square> {
     
     private Sequence sequence;
     private int index;
@@ -20,9 +20,9 @@ public class SequenceIterator implements Iterator<Pair> {
     }
 
     @Override
-    public Pair next() {
+    public Square next() {
         if(hasNext()) {
-            Pair pair = sequence.getPair(index);
+            Square pair = sequence.getPair(index);
             index++;
             return pair;
         }

@@ -27,4 +27,14 @@ public enum FillType {
     public String toString() {
         return name();
     }
+    
+    public static FillType fromString(String fillTypeString) {
+        for(FillType testFillType : FillType.values()) {
+            if(testFillType.name().equals(fillTypeString)) {
+                return testFillType;
+            }
+        }
+        
+        return null;
+    }
 }

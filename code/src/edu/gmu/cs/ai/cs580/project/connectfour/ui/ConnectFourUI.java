@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.Window;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -40,8 +41,6 @@ public class ConnectFourUI {
 
         // Create and set up the window.
         GameWindow connectFourFrame = new GameWindow();
-
-
         
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(5, 5, 5, 5);
@@ -58,19 +57,6 @@ public class ConnectFourUI {
         
         JPanel layoutPanel = new JPanel(new GridBagLayout());
         layoutPanel.setBackground(BACKGROUND_COLOR);
-        
-        // Game Info Panel
-        Border standardLineBorder = BorderFactory.createLineBorder(Color.BLACK, 1, false);  
-        JPanel gameInformationPanel = new JPanel(new GridBagLayout());
-        gameInformationPanel.setBackground(BACKGROUND_COLOR);
-        Border gameInformationPanelBorder = BorderFactory.createTitledBorder(standardLineBorder, "Game Information", TitledBorder.LEADING, TitledBorder.TOP); 
-        gameInformationPanel.setBorder(gameInformationPanelBorder);
-        
-        
-        JLabel gameInformationLabel = new JLabel("This is some game information.");
-        
-        gameInformationPanel.add(gameInformationLabel, c);
-        
         
         // BoardPanel
         Border standardLineBorder2 = BorderFactory.createLineBorder(Color.BLACK, 1, false);  
@@ -92,27 +78,42 @@ public class ConnectFourUI {
         JTextArea gameLog = new JTextArea();
         gameLog.setEditable(false);
         // TODO - Include the date every time that we add a message.
+        // TODO - Put an upper bound on the vertical size of the game log.
         gameLog.append("This is some random text." + Constants.NEWLINE);
         gameLog.append("This is some random text again." + Constants.NEWLINE);
         gameLog.append("This is some random text 3." + Constants.NEWLINE);
         gameLog.append("This is some random text." + Constants.NEWLINE);
         gameLog.append("This is some random text again." + Constants.NEWLINE);
         gameLog.append("This is some random text 3." + Constants.NEWLINE);
-        
         
         JScrollPane gameLogScrollPane = new JScrollPane(gameLog);
         gameLogScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
         gameLogPanel.add(gameLogScrollPane, c);
+        
+        
+        // Game Info Panel
+        Border standardLineBorder = BorderFactory.createLineBorder(Color.BLACK, 1, false);  
+        JPanel gameInformationPanel = new JPanel(new GridBagLayout());
+        gameInformationPanel.setBackground(BACKGROUND_COLOR);
+        Border gameInformationPanelBorder = BorderFactory.createTitledBorder(standardLineBorder, "Game Information", TitledBorder.LEADING, TitledBorder.TOP); 
+        gameInformationPanel.setBorder(gameInformationPanelBorder);
+        
+        
+        JLabel gameInformationLabel = new JLabel("This is some game information.");
+        
+        gameInformationPanel.add(gameInformationLabel, c);
                 
         c.insets = new Insets(0, 0, 0, 0);
         
-        layoutPanel.add(gameInformationPanel, c);
-        c.gridy++;
         layoutPanel.add(boardPanel, c);
-        
         c.gridy++;
         layoutPanel.add(gameLogPanel, c);
+        
+        c.gridx++;
+        c.gridy = 0;
+        c.gridheight = 2;
+        layoutPanel.add(gameInformationPanel, c);
         
         connectFourFrame.getContentPane().add(layoutPanel, BorderLayout.CENTER);
         //connectFourFrame.setResizable(false);
@@ -133,18 +134,51 @@ public class ConnectFourUI {
     public void displayUI() {
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
+        try {
+            SwingUtilities.invokeAndWait(new Runnable() {
+                @Override            
+                public void run() {
+                    createAndShowGUI();
+                }
+            });
+        } catch (InvocationTargetException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     
     public void refresh() {
         SwingUtilities.invokeLater(new Runnable() {
+            @Override            
             public void run() {
                 connectFourPanel.repaint();
             }
         });
+    }
+    
+    public void beginMouseMonitoring() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                connectFourPanel.startMouseListeners();
+            }
+        });
+    }
+    
+    public Integer waitAndGetClickedColumn() {
+        connectFourPanel.waitForColumnClick();
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                connectFourPanel.stopMouseListeners();
+            }
+        });
+        
+        Integer result = connectFourPanel.getSelectedColumn();
+        return result;
     }
 }

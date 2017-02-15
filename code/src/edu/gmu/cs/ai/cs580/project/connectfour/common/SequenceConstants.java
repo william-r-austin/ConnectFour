@@ -45,9 +45,9 @@ public class SequenceConstants {
         for(int i = 0; i < Constants.COLUMNS - Constants.WINNING_DISCS_COUNT + 1; i++) {
             for(int j = 0; j < Constants.ROWS; j++) {
                 Sequence newSequence = new Sequence();
-                newSequence.setSequenceType(SequenceType.HORIZONTAL);
+                newSequence.setSequenceType(OrientationType.HORIZONTAL);
                 for(int k = 0; k < Constants.WINNING_DISCS_COUNT; k++) {
-                    Pair pair = new Pair(i + k, j);
+                    Square pair = new Square(i + k, j);
                     newSequence.setPair(k, pair);
                 }
                 horzSequences[x] = newSequence;
@@ -67,9 +67,9 @@ public class SequenceConstants {
         for(int i = 0; i < Constants.COLUMNS; i++) {
             for(int j = 0; j < Constants.ROWS - Constants.WINNING_DISCS_COUNT + 1; j++) {
                 Sequence newSequence = new Sequence();
-                newSequence.setSequenceType(SequenceType.VERTICAL);
+                newSequence.setSequenceType(OrientationType.VERTICAL);
                 for(int k = 0; k < Constants.WINNING_DISCS_COUNT; k++) {
-                    Pair pair = new Pair(i, j + k);
+                    Square pair = new Square(i, j + k);
                     newSequence.setPair(k, pair);
                 }
                 vertSequences[x] = newSequence;
@@ -89,9 +89,9 @@ public class SequenceConstants {
         for(int i = 0; i < Constants.COLUMNS - Constants.WINNING_DISCS_COUNT + 1; i++) {
             for(int j = 0; j < Constants.ROWS - Constants.WINNING_DISCS_COUNT + 1; j++) {
                 Sequence newSequence = new Sequence();
-                newSequence.setSequenceType(SequenceType.DIAGONAL_UP);
+                newSequence.setSequenceType(OrientationType.DIAGONAL_UP);
                 for(int k = 0; k < Constants.WINNING_DISCS_COUNT; k++) {
-                    Pair pair = new Pair(i + k, j + k);
+                    Square pair = new Square(i + k, j + k);
                     newSequence.setPair(k, pair);
                 }
                 diagSequences[x] = newSequence;
@@ -111,9 +111,9 @@ public class SequenceConstants {
         for(int i = 0; i < Constants.COLUMNS - Constants.WINNING_DISCS_COUNT + 1; i++) {
             for(int j = 0; j < Constants.ROWS - Constants.WINNING_DISCS_COUNT + 1; j++) {
                 Sequence newSequence = new Sequence();
-                newSequence.setSequenceType(SequenceType.DIAGONAL_DOWN);
+                newSequence.setSequenceType(OrientationType.DIAGONAL_DOWN);
                 for(int k = 0; k < Constants.WINNING_DISCS_COUNT; k++) {
-                    Pair pair = new Pair(i + k, j + Constants.WINNING_DISCS_COUNT - k - 1);
+                    Square pair = new Square(i + k, j + Constants.WINNING_DISCS_COUNT - k - 1);
                     newSequence.setPair(k, pair);
                 }
                 diagSequences[x] = newSequence;
