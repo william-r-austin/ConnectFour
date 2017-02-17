@@ -36,13 +36,18 @@ public class TestAgent implements ConnectFourAgent {
         
         if(!depthOneScores.isEmpty()) {
             for(Map.Entry<Integer, Integer> entry : depthOneScores.entrySet()) {
+                
+                System.out.println("Move #" + gameState.getMoveSequence().length() 
+                    + ", Column #" + entry.getKey() + ", Value = " + entry.getValue());
                 if(entry.getValue() > bestScore) {
                     bestColumn = entry.getKey();
                     bestScore = entry.getValue();
                 }
             }
         }
-        
+
+        System.out.println("Move #" + gameState.getMoveSequence().length() 
+                + ", Best Column = " + bestColumn);
         return bestColumn;
     }
 

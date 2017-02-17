@@ -91,15 +91,12 @@ public class BoardPanel extends JPanel implements MouseMotionListener, MouseList
     
     public void waitForColumnClick() {
         
-        System.out.println("Waiting for column click - acquiring lock.");
         userInputLock.lock();
         try {
-            System.out.println("Creating condition and waiting for signal.");
             columnClickedCondition = null;
             columnClickedCondition = userInputLock.newCondition();
             columnClickedCondition.await();
             columnClickedCondition = null;            
-            System.out.println("Condition signal received. Returning.");
         } 
         catch (InterruptedException e) {
             e.printStackTrace();
@@ -189,14 +186,10 @@ public class BoardPanel extends JPanel implements MouseMotionListener, MouseList
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-        //System.out.println("Mouse clicked: " + e);
-        //handleMouseClick(e);
-    }
+    public void mouseClicked(MouseEvent e) {}
     
     private synchronized void handleMouseClick(MouseEvent e) {
         Integer columnNumber = getColumnSelectionFromMouseClick(e);
-        System.out.println("Click registered in column: " + columnNumber);
         
         if(columnNumber != null && columnNumber >= 0 && columnNumber < Constants.COLUMNS) {
             setSelectedColumn(columnNumber);
@@ -236,7 +229,6 @@ public class BoardPanel extends JPanel implements MouseMotionListener, MouseList
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        System.out.println("Mouse released: " + e);
         handleMouseClick(e);
     }
 

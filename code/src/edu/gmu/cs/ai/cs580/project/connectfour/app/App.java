@@ -2,7 +2,6 @@ package edu.gmu.cs.ai.cs580.project.connectfour.app;
 
 import edu.gmu.cs.ai.cs580.project.connectfour.agent.ConnectFourAgent;
 import edu.gmu.cs.ai.cs580.project.connectfour.agent.HumanPlayer;
-import edu.gmu.cs.ai.cs580.project.connectfour.agent.RandomMachinePlayer;
 import edu.gmu.cs.ai.cs580.project.connectfour.agent.TestAgent;
 import edu.gmu.cs.ai.cs580.project.connectfour.common.GameState;
 import edu.gmu.cs.ai.cs580.project.connectfour.common.Player;
@@ -18,14 +17,13 @@ public class App {
         ConnectFourUI userInterface = new ConnectFourUI(masterGameState);
         userInterface.displayUI();
         
-       // ConnectFourAgent player1 = new RandomMachinePlayer(Player.PLAYER_A);
-        ConnectFourAgent player2 = new HumanPlayer(Player.PLAYER_B, userInterface);
-        
-        //--------------------------------------------------------------
-        
+        // ConnectFourAgent player1 = new RandomMachinePlayer(Player.PLAYER_A);
         ConnectFourAgent player1 = new TestAgent(Player.PLAYER_A);
-        //ConnectFourAgent player2 = new HumanPlayer(Player.PLAYER_B, userInterface);
-        //ConnectFourAgent player2 = new RandomMachinePlayer(Player.PLAYER_B);
+        
+        // --------------------------------------------------------------
+        
+        ConnectFourAgent player2 = new HumanPlayer(Player.PLAYER_B, userInterface);
+        // ConnectFourAgent player2 = new RandomMachinePlayer(Player.PLAYER_B);
         
         ConnectFourAgent[] playerArray = new ConnectFourAgent[2];
         playerArray[0] = player1;
