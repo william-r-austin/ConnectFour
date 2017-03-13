@@ -4,6 +4,7 @@ public class WinCheckResult {
     private Boolean foundWinner = false;
     private Player winningPlayer = null;
     private Sequence winningSequence = null;
+    private Boolean isGameComplete = false;
     
     public Boolean getFoundWinner() {
         return foundWinner;
@@ -27,6 +28,14 @@ public class WinCheckResult {
     
     public void setWinningSequence(Sequence winningSequence) {
         this.winningSequence = winningSequence;
+    }
+
+    public Boolean getIsGameComplete() {
+        return isGameComplete;
+    }
+
+    public void setIsGameComplete(Boolean isGameComplete) {
+        this.isGameComplete = isGameComplete;
     }
 
 }

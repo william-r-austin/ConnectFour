@@ -25,11 +25,18 @@ import edu.gmu.cs.ai.cs580.project.connectfour.common.GameState;
 public class ConnectFourUI {
     
     public static final Color BACKGROUND_COLOR = Color.LIGHT_GRAY;
+    private GameWindow connectFourFrame;
     private GameState gameState;
     private BoardPanel connectFourPanel;
     
     public ConnectFourUI(GameState gameState) {
         this.gameState = gameState;
+        this.connectFourFrame = new GameWindow();
+    }
+    
+    public ConnectFourUI() {
+        this.gameState = new GameState();
+        this.connectFourFrame = new GameWindow();
     }
     
     /**
@@ -38,10 +45,6 @@ public class ConnectFourUI {
      * event-dispatching thread.
      */
     private void createAndShowGUI() {
-
-        // Create and set up the window.
-        GameWindow connectFourFrame = new GameWindow();
-        
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(5, 5, 5, 5);
         c.ipadx = 0;
@@ -180,5 +183,13 @@ public class ConnectFourUI {
         
         Integer result = connectFourPanel.getSelectedColumn();
         return result;
+    }
+    
+    public GameWindow getGameWindow() {
+        return connectFourFrame;
+    }
+    
+    public GameState getGameState() {
+        return gameState;
     }
 }

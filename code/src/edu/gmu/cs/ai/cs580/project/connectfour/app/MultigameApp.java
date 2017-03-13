@@ -1,33 +1,44 @@
 package edu.gmu.cs.ai.cs580.project.connectfour.app;
 
 import edu.gmu.cs.ai.cs580.project.connectfour.agent.ConnectFourAgent;
-import edu.gmu.cs.ai.cs580.project.connectfour.agent.RandomMachinePlayer;
 import edu.gmu.cs.ai.cs580.project.connectfour.agent.TestAgent;
-import edu.gmu.cs.ai.cs580.project.connectfour.common.GameState;
 import edu.gmu.cs.ai.cs580.project.connectfour.common.Player;
-import edu.gmu.cs.ai.cs580.project.connectfour.common.WinCheckResult;
-import edu.gmu.cs.ai.cs580.project.connectfour.ui.ConnectFourUI;
 
 public class MultigameApp {
+    
+    private static final Integer[] CONFIG1 = {2, 60, 2200, 800000, -1, -40, -2200, -100000};
+    //private static final Integer[] CONFIG2 = {2, 34, 2907, 104618, -4, -197, -968, -6588};
+    private static final Integer[] CONFIG2 = {1, 1764, 7050, 235700, -3, -56, -1898, -253731};
+    
+    
     public static void main(String[] args) {
         
-        for(int gameNumber = 1; gameNumber <= 100; gameNumber++) {
-            GameState masterGameState = new GameState();
+        //for(int gameNumber = 1; gameNumber <= 2; gameNumber++) {
+            //GameState masterGameState = new GameState();
             
            // ConnectFourUI userInterface = new ConnectFourUI(masterGameState);
             //userInterface.displayUI();
             
-            ConnectFourAgent player1 = new RandomMachinePlayer(Player.PLAYER_A);
+            ConnectFourAgent player1A = new TestAgent(Player.PLAYER_A, CONFIG1);
             //ConnectFourAgent player1 = new TestAgent(Player.PLAYER_A);
             
             
             //--------------------------------------------------------------
             
             //onnectFourAgent player2 = new HumanPlayer(Player.PLAYER_B, userInterface);
-            ConnectFourAgent player2 = new TestAgent(Player.PLAYER_B);
+            ConnectFourAgent player1B = new TestAgent(Player.PLAYER_B, CONFIG2);
             //ConnectFourAgent player2 = new HumanPlayer(Player.PLAYER_B, userInterface);
             //ConnectFourAgent player2 = new RandomMachinePlayer(Player.PLAYER_B);
             
+            AppUtilities.playSimulatedGame(player1A, player1B);
+            
+            
+            ConnectFourAgent player2A = new TestAgent(Player.PLAYER_A, CONFIG2);
+            ConnectFourAgent player2B = new TestAgent(Player.PLAYER_B, CONFIG1);
+            
+            AppUtilities.playSimulatedGame(player2A, player2B);
+        //}
+            /*
             ConnectFourAgent[] playerArray = new ConnectFourAgent[2];
             playerArray[0] = player1;
             playerArray[1] = player2;
@@ -60,7 +71,7 @@ public class MultigameApp {
                 
             }
         }
-        
+        */
 
     }
 

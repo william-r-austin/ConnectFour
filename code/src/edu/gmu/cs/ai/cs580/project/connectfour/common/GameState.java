@@ -150,14 +150,21 @@ public class GameState {
     }
     
     public WinCheckResult checkForWinner() {
+          
         for(Sequence sequence : SequenceConstants.ALL_SEQUENCES) {
             WinCheckResult wcr = populateWinCheckResultForSequence(sequence);
             if(wcr != null && wcr.getFoundWinner()) {
+                wcr.setIsGameComplete(true);
                 return wcr;
             }
         }
-                
-        return new WinCheckResult();
+        
+        WinCheckResult result = new WinCheckResult();
+        if(moveSequence.length() >= Constants.COLUMNS * Constants.ROWS) {
+            result.setIsGameComplete(true);
+        }
+        
+        return result;
     }
     
     public WinCheckResult populateWinCheckResultForSequence(Sequence sequence) {
