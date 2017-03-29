@@ -6,9 +6,13 @@ import edu.gmu.cs.ai.cs580.project.connectfour.common.Player;
 
 public class MultigameApp {
     
-    private static final Integer[] CONFIG1 = {2, 60, 2200, 800000, -1, -40, -2200, -100000};
-    //private static final Integer[] CONFIG2 = {2, 34, 2907, 104618, -4, -197, -968, -6588};
-    private static final Integer[] CONFIG2 = {1, 1764, 7050, 235700, -3, -56, -1898, -253731};
+    //private static final Integer[] CONFIG1 = {2, 60, 2200, 800000, -1, -40, -2200, -100000};
+    //private static final Integer[] CONFIG1 = {2, 34, 2907, 104618, -4, -197, -968, -6588};
+    private static final Integer[] CONFIG1 = {2, 100, 5000, 130000, -1, -85, -4000, -125000};
+    private static final Integer[] CONFIG2 = {2, 120, 1200, 0, -1, -100, -700, 0};
+    //private static final Integer[] CONFIG2 = {2, 30, 600, 12000, -1, -20, -400, -8000};
+    //private static final Integer[] CONFIG2 = {2, 60, 2200, 80000, -1, -40, -2200, -10000};
+    
     
     
     public static void main(String[] args) {

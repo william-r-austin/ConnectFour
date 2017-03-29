@@ -20,7 +20,7 @@ import edu.gmu.cs.ai.cs580.project.connectfour.common.WinCheckResult;
 public class TestAgent implements ConnectFourAgent {
     
     private Player player;
-    private final Integer DEPTH_CUTOFF = 5;
+    private final Integer DEPTH_CUTOFF = 6;
     
     private static final Integer[] DEFAULT_WEIGHTS = //{2, 60, 2200, 80000, -1, -40, -2200, -10000};
         {2, 34, 2907, 104618, -4, -197, -968, -6588};

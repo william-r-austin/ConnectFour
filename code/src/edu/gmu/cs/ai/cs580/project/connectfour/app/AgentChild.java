@@ -1,7 +1,7 @@
 package edu.gmu.cs.ai.cs580.project.connectfour.app;
 
 import edu.gmu.cs.ai.cs580.project.connectfour.agent.ConnectFourAgent;
-import edu.gmu.cs.ai.cs580.project.connectfour.agent.TestAgent;
+import edu.gmu.cs.ai.cs580.project.connectfour.agent.SampleMinimaxAgent;
 import edu.gmu.cs.ai.cs580.project.connectfour.common.Player;
 
 public class AgentChild {
@@ -12,8 +12,8 @@ public class AgentChild {
     private Integer index;
     
     public AgentChild(Integer[] weights, Integer index) {
-        this.agentA = new TestAgent(Player.PLAYER_A, weights);
-        this.agentB = new TestAgent(Player.PLAYER_B, weights);
+        this.agentA = new SampleMinimaxAgent(Player.PLAYER_A, 6, weights);
+        this.agentB = new SampleMinimaxAgent(Player.PLAYER_B, 6, weights);
         this.totalWins = 0;
         this.weights = weights;
         this.index = index;

@@ -10,19 +10,35 @@ import edu.gmu.cs.ai.cs580.project.connectfour.common.WinCheckResult;
 
 public class ParameterTuningApp {
     
-    public static final Integer POOL_SIZE = 7;
+    public static final Integer POOL_SIZE = 6;
     public static final Random random = new Random();
     
     public static void main(String[] args) {
         AgentChild[] pool = new AgentChild[POOL_SIZE];
-        
+        /*
         for(int i = 0; i < POOL_SIZE; i++) {
             pool[i] = new AgentChild(defaultWeights(), i);
         }
+        */
+        
+        // Comment this out
+        //private static final Integer[] CONFIG1 = {2, 60, 2200, 800000, -1, -40, -2200, -100000};
+        //private static final Integer[] CONFIG1 = {2, 34, 2907, 104618, -4, -197, -968, -6588};
+        //private static final Integer[] CONFIG1 = {2, 100, 5000, 130000, -1, -85, -4000, -125000};
+        //private static final Integer[] CONFIG2 = {2, 120, 1200, 0, -1, -100, -700, 0};
+        //private static final Integer[] CONFIG2 = {2, 30, 600, 12000, -1, -20, -400, -8000};
+        //private static final Integer[] CONFIG2 = {2, 60, 2200, 80000, -1, -40, -2200, -10000};
+        
+        pool[0] = new AgentChild(new Integer[] {2, 60, 2200, 800000, -1, -40, -2200, -100000}, 0);
+        pool[1] = new AgentChild(new Integer[] {2, 34, 2907, 104618, -4, -197, -968, -6588}, 1);
+        pool[2] = new AgentChild(new Integer[] {2, 100, 5000, 130000, -1, -85, -4000, -125000}, 2);
+        pool[3] = new AgentChild(new Integer[] {2, 120, 1200, 0, -1, -100, -700, 0}, 3);
+        pool[4] = new AgentChild(new Integer[] {2, 30, 600, 12000, -1, -20, -400, -8000}, 4);
+        pool[5] = new AgentChild(new Integer[] {2, 60, 2200, 80000, -1, -40, -2200, -10000}, 5);
         
         int generation = 1;
         
-        while(generation <= 10000) {
+        while(generation <= 1) {
             
             compete(pool);
             

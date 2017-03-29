@@ -9,7 +9,8 @@ import edu.gmu.cs.ai.cs580.project.connectfour.common.SequenceState;
 
 public class SampleMinimaxAgent extends MinimaxAgent {
 
-    private static final Integer[] DEFAULT_WEIGHTS = {2, 60, 2200, 80000, -1, -40, -2200, -10000};
+    private static final Integer[] DEFAULT_WEIGHTS = {2, 100, 5000, 130000, -1, -85, -4000, -125000}; 
+    //{2, 60, 2200, 80000, -1, -40, -2200, -10000};
     private final Integer[] weights;
     
     public SampleMinimaxAgent(Player player, Integer depthCutoff, Integer[] weights) {

@@ -1,5 +1,7 @@
 package edu.gmu.cs.ai.cs580.project.connectfour.app;
 
+import javax.swing.JOptionPane;
+
 import edu.gmu.cs.ai.cs580.project.connectfour.agent.ConnectFourAgent;
 import edu.gmu.cs.ai.cs580.project.connectfour.common.GameState;
 import edu.gmu.cs.ai.cs580.project.connectfour.common.WinCheckResult;
@@ -44,11 +46,18 @@ public class AppUtilities {
                 winCheckResult = masterGameState.checkForWinner();
                 complete = winCheckResult.getIsGameComplete();
                 if(complete) {
+                    String message = "";
                     if(winCheckResult.getFoundWinner()) {
-                        System.out.println("Game completed, WINNER found: " + winCheckResult.getWinningPlayer() + ", total moves = " + moveNumber);
+                        message = "Game completed, WINNER found: " + winCheckResult.getWinningPlayer() + ", total moves = " + moveNumber;
                     }
                     else {
-                        System.out.println("Game completed, result was a TIE, total moves = " + moveNumber);
+                        message = "Game completed, result was a TIE, total moves = " + moveNumber;
+                    }
+                    
+                    System.out.println(message);
+                    
+                    if(userInterface != null) {
+                        JOptionPane.showMessageDialog(userInterface.getGameWindow(), message, "Game Finished", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             }

@@ -10,6 +10,8 @@ import edu.gmu.cs.ai.cs580.project.connectfour.ui.ConnectFourUI;
 
 public class App {
     
+    private static final Integer MINIMAX_DEPTH = 6;
+    
     public static void main(String[] args) {
         
         ConnectFourAgent player1 = null;
@@ -25,10 +27,10 @@ public class App {
         
         if(JOptionPane.YES_OPTION == moveOrderResult) {
             player1 = new HumanPlayer(Player.PLAYER_A, userInterface);
-            player2 = new SampleMinimaxAgent(Player.PLAYER_B);            
+            player2 = new SampleMinimaxAgent(Player.PLAYER_B, MINIMAX_DEPTH);            
         }
         else {
-            player1 = new SampleMinimaxAgent(Player.PLAYER_A);
+            player1 = new SampleMinimaxAgent(Player.PLAYER_A, MINIMAX_DEPTH);
             player2 = new HumanPlayer(Player.PLAYER_B, userInterface);
         }
         

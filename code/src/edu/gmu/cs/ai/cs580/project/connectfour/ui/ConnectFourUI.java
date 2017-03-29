@@ -70,7 +70,7 @@ public class ConnectFourUI {
         
         connectFourPanel = new BoardPanel(gameState);
         boardPanel.add(connectFourPanel, c);
-        
+        /*
         // Game Log Panel
         Border standardLineBorder3 = BorderFactory.createLineBorder(Color.BLACK, 1, false);  
         JPanel gameLogPanel = new JPanel(new GridBagLayout());
@@ -107,16 +107,19 @@ public class ConnectFourUI {
         
         gameInformationPanel.add(gameInformationLabel, c);
                 
+        
+        */
         c.insets = new Insets(0, 0, 0, 0);
         
         layoutPanel.add(boardPanel, c);
+        /*
         c.gridy++;
         layoutPanel.add(gameLogPanel, c);
         
         c.gridx++;
         c.gridy = 0;
         c.gridheight = 2;
-        layoutPanel.add(gameInformationPanel, c);
+        layoutPanel.add(gameInformationPanel, c);*/
         
         connectFourFrame.getContentPane().add(layoutPanel, BorderLayout.CENTER);
         //connectFourFrame.setResizable(false);

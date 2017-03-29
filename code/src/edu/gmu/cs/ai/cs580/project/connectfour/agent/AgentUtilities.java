@@ -80,5 +80,18 @@ public class AgentUtilities {
         
         return allSequenceStates;
     }
+    
+    public static void printBoard(GameState gameState) {
+        for(int row = Constants.ROWS - 1; row >= 0; row--) {
+        
+            StringBuilder sb = new StringBuilder();
+            for(int col = 0; col < Constants.COLUMNS; col++) {    
+                FillType fillType = gameState.getFillType(col, row);
+                sb.append(fillType.getCharacterValue());
+            }
+            System.out.println(sb.toString());
+        }
+        //System.out.println("-------");
+    }
 
 }

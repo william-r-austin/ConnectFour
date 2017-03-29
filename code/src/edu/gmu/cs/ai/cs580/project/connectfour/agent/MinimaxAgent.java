@@ -16,7 +16,7 @@ public abstract class MinimaxAgent implements ConnectFourAgent {
     }
     
     public MinimaxAgent(Player player) {
-        this(player, 5);
+        this(player, 6);
     }
     
     @Override
@@ -47,26 +47,33 @@ public abstract class MinimaxAgent implements ConnectFourAgent {
     private MinimaxResult minimaxHelper(GameState gameState, Integer depth, Boolean isMax, Integer alpha, Integer beta) {
         Boolean isTerminalState = false;
         Integer stateValue = null;
-        if(depth >= depthCutoff) {
-            stateValue = evaluateBoard(gameState); 
+        
+        WinCheckResult wcr = gameState.checkForWinner();
+        if(wcr.getIsGameComplete()) {
             isTerminalState = true;
-        }
-        else {
-            WinCheckResult wcr = gameState.checkForWinner();
-            if(wcr.getIsGameComplete()) {
-                isTerminalState = true;
-                stateValue = 0;
-                
-                if(wcr.getFoundWinner()) {
-                    if(Player.PLAYER_A.equals(wcr.getWinningPlayer())) {
-                        stateValue = Integer.MAX_VALUE;
-                    }
-                    else {
-                        stateValue = Integer.MIN_VALUE;
-                    }
+            stateValue = 0;
+            
+            if(wcr.getFoundWinner()) {
+                if(Player.PLAYER_A.equals(wcr.getWinningPlayer())) {
+                    stateValue = Integer.MAX_VALUE - 10;
                     
+                    //System.out.println("Player A is the winner, DEPTH = " + depth);
+                    //AgentUtilities.printBoard(gameState);
+                }
+                else {
+                    stateValue = Integer.MIN_VALUE + 10;
+                    
+                    //System.out.println("Player B is the winner, DEPTH = " + depth);
+                    //AgentUtilities.printBoard(gameState);
                 }
             }
+        }
+        else if(depth >= depthCutoff) {
+            stateValue = evaluateBoard(gameState); 
+            isTerminalState = true;
+            
+            //System.out.println("Max Depth Reached (" + depth + ")! Board Value = " + stateValue);
+            //AgentUtilities.printBoard(gameState);
         }
 
         if(isTerminalState) {
