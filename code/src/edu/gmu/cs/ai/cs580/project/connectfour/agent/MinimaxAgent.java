@@ -55,13 +55,13 @@ public abstract class MinimaxAgent implements ConnectFourAgent {
             
             if(wcr.getFoundWinner()) {
                 if(Player.PLAYER_A.equals(wcr.getWinningPlayer())) {
-                    stateValue = Integer.MAX_VALUE - 10;
+                    stateValue = (Integer.MAX_VALUE / 2) - (depth * 100);
                     
                     //System.out.println("Player A is the winner, DEPTH = " + depth);
                     //AgentUtilities.printBoard(gameState);
                 }
                 else {
-                    stateValue = Integer.MIN_VALUE + 10;
+                    stateValue = (Integer.MIN_VALUE / 2) + (depth * 100);
                     
                     //System.out.println("Player B is the winner, DEPTH = " + depth);
                     //AgentUtilities.printBoard(gameState);
